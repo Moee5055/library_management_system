@@ -1,0 +1,5 @@
+1) std::istringstream iss(line);
+Purpose: std::istringstream is a stream class to operate on strings. It allows you to treat a string as if it were a stream (like a file or console input). This makes it easier to parse the string using stream operations, such as >> or std::getline.
+
+Usage: When you initialize an std::istringstream with a string (in this case, line), it allows you to extract parts of the string using stream operations.
+

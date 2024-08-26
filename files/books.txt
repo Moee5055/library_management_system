@@ -1,0 +1,1 @@
+{bookId:123, title: dfdfas, author: 1hjfhjf, published year: 1234, isBorrowed: false}
