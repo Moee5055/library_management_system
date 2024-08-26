@@ -23,6 +23,7 @@ public:
     void addNewBooks();
     void addNewMembers();
     void borrowBook();
+    void returnBook();
 };
 
 LibraryFunctions::LibraryFunctions()
@@ -56,7 +57,9 @@ void LibraryFunctions::LoadBooks()
         while (getline(MyReadFile, text))
         {
             Books book;
-            text = text.substr(1, text.length() - 2);
+            if(text.size() > 0) {
+                text = text.substr(1, text.length() - 2);
+            }
             istringstream iss(text);
             string token, bookId, title, author, year, isBookBorrowed;
             getline(iss, token, ':');
@@ -111,7 +114,9 @@ void LibraryFunctions::LoadMembers()
         while (getline(MyReadFile, membersData))
         {
             Members member;
-            membersData = membersData.substr(1, membersData.length() - 2);
+            if(membersData.size() >= 1) {
+                membersData = membersData.substr(1, membersData.length() - 2);
+            }
             istringstream iss(membersData);
             string token, memberId, name, contact;
             getline(iss, token, ':');
@@ -207,15 +212,16 @@ void LibraryFunctions::borrowBook()
                 if(books[i].getIsBookBorrowed() == "true") {
                     throw 2;
                 }    
-                cout << "Okay, book is available. you can borrow now." << endl;
-                cout << "You have successfully borrowed book with title '" << books[i].getBookTitle() << "'." << endl;
                 books[i].setIsBookBorrowed("true");
+                cout << "Okay, book is available. you can borrow now." << endl;
+                cout << "You have successfully borrowed book name '" << books[i].getBookTitle() << "'." << endl;
+                helper.updateFile(books, booksFilesize);
+                helper.updateTranscationRecord(books[i], "borrowed");
             }
         }
         if(!isBookThere) {
             throw 1;
         }
-        helper.updateFile(books, booksFilesize);
     } catch(int errNum) {
         switch(errNum) {
             case 1:
@@ -225,5 +231,28 @@ void LibraryFunctions::borrowBook()
                 cout << "Oops!, Book is not Available right now.";
                 break;
         }
+    }
+}
+
+void LibraryFunctions::returnBook() {
+    helper.promptUser();
+    helper.checkMember();
+    try {
+        bool isBookMatched = false;
+        for(int i = 0; i < booksFilesize; i++) {
+            if(books[i].getBookId() == helper.getBookId()) {
+                books[i].setIsBookBorrowed("false");
+                cout << "Successfully received your book" << endl;
+                helper.updateFile(books, booksFilesize);
+                helper.updateTranscationRecord(books[i],"returned");
+                isBookMatched = true;
+            }
+        }
+        if(!isBookMatched) {
+             throw 1;
+        }
+        
+    }catch(...) {
+         cout << "Invalid Book Id"; 
     }
 }

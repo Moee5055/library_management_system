@@ -1,0 +1,4 @@
+{memberId: 2332, bookId: 1233, transcation_type: returned, date: Mon Aug 26 15:32:38 2024
+,}
+{memberId: 2332, bookId: 1233, transcation_type: borrowed, date: Mon Aug 26 15:33:51 2024
+,}

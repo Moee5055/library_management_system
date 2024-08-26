@@ -2,7 +2,9 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <ctime>
 #include "./books.h"
+#include "members.h"
 using namespace std;
 
 class HelperFunctions {
@@ -18,6 +20,7 @@ class HelperFunctions {
             return bookId;
         } 
         void updateFile(Books *books, int booksFileSize);
+        void updateTranscationRecord(Books book, string type);
 };
 
 void HelperFunctions::promptUser() {
@@ -80,5 +83,21 @@ void HelperFunctions::updateFile(Books *books, int booksFileSize) {
                 cout << "Error: Unable to open file.";
                 break;
         }
+    }
+}
+
+void HelperFunctions::updateTranscationRecord(Books book, string type){
+    time_t timestamp;
+    time(&timestamp);
+      try {
+        ofstream File("./files/history.txt", ios::app);
+        if(!File.is_open()) {
+            throw 0;
+        }
+        File << "memberId: " << memberId << ", bookId: " << book.getBookId() << ", transcation_type: " << type << ", date: " << ctime(&timestamp) << "," << endl;
+        File.close();
+        cout << "Transcation added to history." << endl;
+    } catch(...) {
+        cout << "Error: Unable to open file.";
     }
 }
