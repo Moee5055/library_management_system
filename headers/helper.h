@@ -24,9 +24,9 @@ class HelperFunctions {
 };
 
 void HelperFunctions::promptUser() {
-    cout << "Your Member Id ? : ";
+    cout << endl << "Member Id ?: ";
     cin >> this->memberId;
-    cout << "Book Id ? : ";
+    cout << "Book Id ?: ";
     cin >> this->bookId;
 }
 
@@ -86,18 +86,29 @@ void HelperFunctions::updateFile(Books *books, int booksFileSize) {
     }
 }
 
-void HelperFunctions::updateTranscationRecord(Books book, string type){
+void HelperFunctions::updateTranscationRecord(Books book, string type) {
     time_t timestamp;
     time(&timestamp);
-      try {
+
+    try {
         ofstream File("./files/history.txt", ios::app);
         if(!File.is_open()) {
             throw 0;
         }
-        File << "memberId: " << memberId << ", bookId: " << book.getBookId() << ", transcation_type: " << type << ", date: " << ctime(&timestamp) << "," << endl;
+
+        // Convert timestamp to string and remove newline character
+        string timeStr = ctime(&timestamp);
+        timeStr.pop_back();  // Remove the newline character at the end
+
+        File << "memberId:" << memberId 
+             << ", bookId:" << book.getBookId() 
+             << ", bookTitle:" << book.getBookTitle() 
+             << ", transcation_type:" << type 
+             << ", date:" << timeStr << "," << endl;
+
         File.close();
-        cout << "Transcation added to history." << endl;
+        cout << "Transaction added to history." << endl;
     } catch(...) {
-        cout << "Error: Unable to open file.";
+        cout << "Error: Unable to open file." << endl;
     }
 }

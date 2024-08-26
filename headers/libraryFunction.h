@@ -16,14 +16,15 @@ class LibraryFunctions
     Members *members;
     int booksFilesize;
     int membersFilesize;
-public:
-    LibraryFunctions();
     void LoadBooks();
     void LoadMembers();
+public:
+    LibraryFunctions();
     void addNewBooks();
     void addNewMembers();
     void borrowBook();
     void returnBook();
+    void viewMemberBorrowingHistory();
 };
 
 LibraryFunctions::LibraryFunctions()
@@ -128,7 +129,7 @@ void LibraryFunctions::LoadMembers()
             getline(iss, token, ':');
             getline(iss, contact, ',');
             member.setContactInformation(contact);
-            *(books + index);
+            members[index] = member;
             index++;
         }
 
@@ -143,14 +144,14 @@ void LibraryFunctions::LoadMembers()
 void LibraryFunctions::addNewBooks()
 {
     string author, title, year, id;
-    cout << "Book Id : ";
+    cout << endl << "Book Id ?: ";
     cin >> id;
     cin.ignore();
-    cout << "Book Author : ";
+    cout << "Author Name ?: ";
     getline(cin, author);
-    cout << "Book Title : ";
+    cout << "Book Title ?: ";
     getline(cin, title);
-    cout << "Published Year : ";
+    cout << "Published Year ?: ";
     cin >> year;
 
     try
@@ -163,6 +164,7 @@ void LibraryFunctions::addNewBooks()
         }
         MyFile << "{bookId:" << id << ", title:" << title << ", author:" << author << ", published year:" << year << ", isBorrowed:" << "false" << ",}" << endl;
         MyFile.close();
+        cout <<endl << title << "book added to one piece collection.";
     }
     catch (const exception &e)
     {
@@ -190,6 +192,7 @@ void LibraryFunctions::addNewMembers()
         }
         MyFile << "{memberId:" << id << ", memberName:" << name << ", Contact Information:" << contact << ",}" << endl;
         MyFile.close();
+        cout << endl << name << " added as new crew member in one piece library";
     }
     catch (const exception &e)
     {
@@ -213,8 +216,8 @@ void LibraryFunctions::borrowBook()
                     throw 2;
                 }    
                 books[i].setIsBookBorrowed("true");
-                cout << "Okay, book is available. you can borrow now." << endl;
-                cout << "You have successfully borrowed book name '" << books[i].getBookTitle() << "'." << endl;
+                cout << endl << "Okay, book is available. you can borrow now...." << endl;
+                cout << "You have successfully borrowed book name.'" << books[i].getBookTitle() << "'." << endl << "... ";
                 helper.updateFile(books, booksFilesize);
                 helper.updateTranscationRecord(books[i], "borrowed");
             }
@@ -242,7 +245,7 @@ void LibraryFunctions::returnBook() {
         for(int i = 0; i < booksFilesize; i++) {
             if(books[i].getBookId() == helper.getBookId()) {
                 books[i].setIsBookBorrowed("false");
-                cout << "Successfully received your book" << endl;
+                cout << endl << "Book returned to one piece library." << endl << "... ";
                 helper.updateFile(books, booksFilesize);
                 helper.updateTranscationRecord(books[i],"returned");
                 isBookMatched = true;
@@ -254,5 +257,66 @@ void LibraryFunctions::returnBook() {
         
     }catch(...) {
          cout << "Invalid Book Id"; 
+    }
+}
+
+void LibraryFunctions::viewMemberBorrowingHistory() {
+    string memberId;
+    cout << endl << "Member Id ?: ";
+    cin >> memberId;
+     try {
+        bool isMember = false;
+        for(int i = 0; i < membersFilesize; i++) {
+            if(members[i].getMemberId() == memberId) {
+                cout << endl << "\t\t\t\t   Transcation History" << endl << "\nMember Id: " << members[i].getMemberId() <<endl << "Member Name: " << members[i].getName() << endl;
+                isMember = true;
+            } 
+        } 
+        if(!isMember) {
+            throw 1;
+        }
+        ifstream MyFile("./files/history.txt");
+        if(!MyFile.is_open()) {
+            throw 2;
+        }
+        string history;
+        int count = 0;
+        while(getline(MyFile, history)) {
+            istringstream iss(history);
+            string token, member_Id, bookId, title, type, date;
+            getline(iss, token, ':');
+            getline(iss, member_Id, ',');
+            if(memberId == member_Id) {
+                getline(iss, token, ':');
+                getline(iss, bookId, ',');
+                getline(iss, token, ':');
+                getline(iss, title, ',');
+                getline(iss, token, ':');
+                getline(iss, type, ',');
+                getline(iss, token, ':');
+                getline(iss, date, ',');
+                cout << endl << "{ bookId: " << bookId << ", bookTitle: " << title; 
+                if (type == "borrowed") {
+                    cout << ", borrowedDate: " << date;
+                } else {
+                    cout << ", returnedDate: " << date;
+                }
+                cout << " }";
+                count++;
+            }
+        }
+        if(count == 0) {
+            cout << endl << "No Transcation for this member";
+        }
+    } catch(int errNum) {
+        switch (errNum)
+        {
+        case 1:
+            cout << "User doesn't exist";
+            break;
+        default:
+            cout << "Error: Unable to open file.";
+            break;
+        }
     }
 }

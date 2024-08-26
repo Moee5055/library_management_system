@@ -1,1 +1,2 @@
-{memberId:2332, memberName:fdfsdfas, Contact Information:dfdfdsf,}
+{memberId:1234, memberName:Monkey D Luffy, Contact Information:Land,}
+{memberId:12, memberName:Nami, Contact Information:straw_hat_luffy,}
