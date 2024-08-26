@@ -8,26 +8,24 @@
 //Books Definiton
 class Books {
 private:
-    int bookId;
-    std::string title;
-    std::string author;
-    int publicationYear;
+    std::string title, bookId, author, publicationYear;
     bool isBorrowed;
 
 public:
-    int getBookId();
+    std::string getBookId();
     std::string getBookTitle();
     std::string getBookAuthor();
-    int getPublicationYear();
-    void setBookId(int bookId);
+    std::string getPublicationYear();
+    bool isBookBorrowed();
+    void setBookId(std::string bookId);
     void setBookTitle(std::string title);
     void setBookAuthor(std::string author);
-    void setPublicationYear(int year);
+    void setPublicationYear(std::string year);
 };
 
 //Books Implementation Section
 
-int Books::getBookId() { //get book id
+std::string Books::getBookId() { //get book id
     return bookId;
 }
 
@@ -39,12 +37,16 @@ std::string Books::getBookTitle() { //return title of book
     return title;
 }
 
-int Books::getPublicationYear() {  //return publication year of the book
+std::string Books::getPublicationYear() {  //return publication year of the book
     return publicationYear;
 }
 
+bool Books::isBookBorrowed() {
+    return this->isBorrowed;
+}
+
 //set Implementation of Books
-void Books::setBookId(int bookId) {
+void Books::setBookId(std::string bookId) {
     this->bookId = bookId;
 }
 
@@ -56,7 +58,7 @@ void Books::setBookAuthor(std::string author) {
     this->author = author;
 }
 
-void Books::setPublicationYear(int year) {
+void Books::setPublicationYear(std::string year) {
     this->publicationYear = year;
 }
 
