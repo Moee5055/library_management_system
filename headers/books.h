@@ -9,18 +9,19 @@
 class Books {
 private:
     std::string title, bookId, author, publicationYear;
-    bool isBorrowed;
-
+    // bool isBorrowed;
+    std::string isBorrowed;
 public:
     std::string getBookId();
     std::string getBookTitle();
     std::string getBookAuthor();
     std::string getPublicationYear();
-    bool isBookBorrowed();
+    std::string getIsBookBorrowed();
     void setBookId(std::string bookId);
     void setBookTitle(std::string title);
     void setBookAuthor(std::string author);
     void setPublicationYear(std::string year);
+    void setIsBookBorrowed(std::string isBorrowed);
 };
 
 //Books Implementation Section
@@ -41,7 +42,7 @@ std::string Books::getPublicationYear() {  //return publication year of the book
     return publicationYear;
 }
 
-bool Books::isBookBorrowed() {
+std::string Books::getIsBookBorrowed() {
     return this->isBorrowed;
 }
 
@@ -60,5 +61,14 @@ void Books::setBookAuthor(std::string author) {
 
 void Books::setPublicationYear(std::string year) {
     this->publicationYear = year;
+}
+
+void Books::setIsBookBorrowed(std::string isBorrowed) {
+    // if(isBorrowed == "true") {
+    //     this->isBorrowed = true;
+    // } else {
+    //     this->isBorrowed = false;
+    // }
+    this->isBorrowed = isBorrowed;
 }
 

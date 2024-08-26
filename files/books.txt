@@ -1,1 +1,1 @@
-{bookId:123, title: dffd, author: 12323, published year: 123, isBorrowed:false}
+{bookId:123, title: dffd, author: 12323, published year: 123, isBorrowed:true,}

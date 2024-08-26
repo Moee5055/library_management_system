@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "./books.h"
 using namespace std;
 
 class HelperFunctions {
@@ -16,6 +17,7 @@ class HelperFunctions {
         string getBookId() {
             return bookId;
         } 
+        void updateFile(Books *books, int booksFileSize);
 };
 
 void HelperFunctions::promptUser() {
@@ -56,6 +58,26 @@ void HelperFunctions::checkMember() {
                 break;
             default:
                 cout << "An Unknow Error occurred";
+                break;
+        }
+    }
+}
+
+void HelperFunctions::updateFile(Books *books, int booksFileSize) {
+    try {
+        ofstream File("./files/books.txt");
+        if(!File.is_open()) {
+            throw 0;
+        }
+        for(int i = 0; i < booksFileSize; i++) {
+             File << "{bookId:" << books[i].getBookId() << ", title:" << books[i].getBookTitle() << ", author:" << books[i].getBookAuthor() << ", published year:" << books[i].getPublicationYear() << ", isBorrowed:" << books[i].getIsBookBorrowed() << ",}" << endl;
+        }
+        File.close();
+        cout << "File name books.txt Updated Successfully" << endl;
+    } catch(int errNum) {
+        switch(errNum) {
+            case 0:
+                cout << "Error: Unable to open file.";
                 break;
         }
     }

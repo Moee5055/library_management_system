@@ -58,7 +58,7 @@ void LibraryFunctions::LoadBooks()
             Books book;
             text = text.substr(1, text.length() - 2);
             istringstream iss(text);
-            string token, bookId, title, author, year;
+            string token, bookId, title, author, year, isBookBorrowed;
             getline(iss, token, ':');
             getline(iss, bookId, ',');
             book.setBookId(bookId);
@@ -71,6 +71,9 @@ void LibraryFunctions::LoadBooks()
             getline(iss, token, ':');
             getline(iss, year, ',');
             book.setPublicationYear(year);
+            getline(iss, isBookBorrowed, ':');
+            getline(iss, isBookBorrowed, ',');
+            book.setIsBookBorrowed(isBookBorrowed);
             books[index] = book;
             index++;
         }
@@ -153,7 +156,7 @@ void LibraryFunctions::addNewBooks()
         {
             throw runtime_error("Failed to open file");
         }
-        MyFile << "{bookId:" << id << ", title: " << title << ", author: " << author << ", published year: " << year << ", isBorrowed:" << "false" << "}" << endl;
+        MyFile << "{bookId:" << id << ", title:" << title << ", author:" << author << ", published year:" << year << ", isBorrowed:" << "false" << ",}" << endl;
         MyFile.close();
     }
     catch (const exception &e)
@@ -180,7 +183,7 @@ void LibraryFunctions::addNewMembers()
         {
             throw runtime_error("Failed to open file");
         }
-        MyFile << "{memberId:" << id << ", memberName: " << name << ", Contact Information: " << contact << "}" << endl;
+        MyFile << "{memberId:" << id << ", memberName:" << name << ", Contact Information:" << contact << ",}" << endl;
         MyFile.close();
     }
     catch (const exception &e)
@@ -193,4 +196,34 @@ void LibraryFunctions::borrowBook()
 {
     helper.promptUser();
     helper.checkMember();  
+    try {
+        bool isBookThere = false;
+        for(int i = 0; i < booksFilesize; i++) {
+            string bookId = books[i].getBookId();
+            if(bookId == helper.getBookId()) {
+                isBookThere = true;
+            }
+            if(isBookThere) {
+                if(books[i].getIsBookBorrowed() == "true") {
+                    throw 2;
+                }    
+                cout << "Okay, book is available. you can borrow now." << endl;
+                cout << "You have successfully borrowed book with title '" << books[i].getBookTitle() << "'." << endl;
+                books[i].setIsBookBorrowed("true");
+            }
+        }
+        if(!isBookThere) {
+            throw 1;
+        }
+        helper.updateFile(books, booksFilesize);
+    } catch(int errNum) {
+        switch(errNum) {
+            case 1:
+                cout << "Error: Unknow book reference";
+                break;
+            case 2:
+                cout << "Oops!, Book is not Available right now.";
+                break;
+        }
+    }
 }
