@@ -217,7 +217,7 @@ void LibraryFunctions::borrowBook()
                 }    
                 books[i].setIsBookBorrowed("true");
                 cout << endl << "Okay, book is available. you can borrow now...." << endl;
-                cout << "You have successfully borrowed book name.'" << books[i].getBookTitle() << "'." << endl << "... ";
+                cout << "You have successfully borrowed book name'" << books[i].getBookTitle() << "'." << endl << "... ";
                 helper.updateFile(books, booksFilesize);
                 helper.updateTranscationRecord(books[i], "borrowed");
             }
@@ -308,6 +308,7 @@ void LibraryFunctions::viewMemberBorrowingHistory() {
         if(count == 0) {
             cout << endl << "No Transcation for this member";
         }
+        MyFile.close();
     } catch(int errNum) {
         switch (errNum)
         {

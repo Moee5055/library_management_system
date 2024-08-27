@@ -1,1 +1,1 @@
-{bookId:123, title:one piece, author:kshitij, published year:2001, isBorrowed:false,}
+{bookId:123, title:one piece, author:kshitij, published year:2001, isBorrowed:true,}

@@ -46,7 +46,7 @@ void Menu::handleChoice() {
 }
 
 void Menu::displayMenu(std::string *arr, int num) {
-    cout << "\t\t\t\tWelcome to One Piece Library" << endl << endl;
+    cout << "\n\n\t\t\t\tWelcome to One Piece Library" << endl << endl;
     cout << "Read carefully and Select the operation : " << endl << endl;
     for (int i = 0; i < num; i++) {
         std::cout << (i + 1) << ". " << arr[i] << std::endl; 

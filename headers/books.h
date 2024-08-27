@@ -9,7 +9,6 @@
 class Books {
 private:
     std::string title, bookId, author, publicationYear;
-    // bool isBorrowed;
     std::string isBorrowed;
 public:
     std::string getBookId();
@@ -63,12 +62,7 @@ void Books::setPublicationYear(std::string year) {
     this->publicationYear = year;
 }
 
-void Books::setIsBookBorrowed(std::string isBorrowed) {
-    // if(isBorrowed == "true") {
-    //     this->isBorrowed = true;
-    // } else {
-    //     this->isBorrowed = false;
-    // }
+void Books::setIsBookBorrowed(std::string isBorrowed) { 
     this->isBorrowed = isBorrowed;
 }
 
