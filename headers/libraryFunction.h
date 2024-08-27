@@ -1,5 +1,14 @@
+/**
+ * @file libraryFunction.h
+ * @brief Core functionality for the Library Management System
+ *
+ * This class handles the main operations of the library including
+ * loading and managing books and members, processing borrowing and
+ * returning of books, and viewing member history.
+ */
 #pragma once
 
+//Header Section
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -27,12 +36,14 @@ public:
     void viewMemberBorrowingHistory();
 };
 
+// Constructor
 LibraryFunctions::LibraryFunctions()
 {
     LoadBooks();
     LoadMembers();
 }
 
+// LibraryFunctions Implementation
 void LibraryFunctions::LoadBooks()
 {
     try

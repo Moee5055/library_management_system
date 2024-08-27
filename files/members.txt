@@ -1,2 +1,2 @@
-{memberId:1234, memberName:Monkey D Luffy, Contact Information:Land,}
-{memberId:12, memberName:Nami, Contact Information:straw_hat_luffy,}
+{memberId:M001, memberName:Padma Shree, Contact Information:padmashree@email.com,}
+{memberId:M002, memberName:Aayu, Contact Information:aayu@gmail.com,}

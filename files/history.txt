@@ -1,3 +1,2 @@
-memberId:1234, bookId:123, bookTitle:one piece, transcation_type:borrowed, date:Mon Aug 26 20:04:05 2024,
-memberId:1234, bookId:123, bookTitle:one piece, transcation_type:returned, date:Mon Aug 26 20:10:31 2024,
-memberId:1234, bookId:123, bookTitle:one piece, transcation_type:borrowed, date:Tue Aug 27 12:05:50 2024,
+memberId:M001, bookId:101, bookTitle:Beginning with C++, transcation_type:borrowed, date:Tue Aug 27 17:23:17 2024,
+memberId:M001, bookId:101, bookTitle:Beginning with C++, transcation_type:returned, date:Tue Aug 27 17:26:34 2024,

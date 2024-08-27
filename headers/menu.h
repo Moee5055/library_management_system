@@ -1,3 +1,10 @@
+/**
+ * @file Menu.h
+ * @brief Manages the user interface for the Library Management System
+ *
+ * This class handles the display of the main menu and processes
+ * user choices to execute appropriate library functions.
+ */
 #pragma once
 
 #include <iostream>

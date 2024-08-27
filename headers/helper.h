@@ -1,3 +1,13 @@
+/**
+ * @file helper.h
+ * @brief Utility functions for the Library Management System
+ *
+ * This class provides helper functions for various operations such as
+ * user input, member validation, and file updates.
+ */
+#pragma once
+
+//Header Section
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -23,6 +33,7 @@ class HelperFunctions {
         void updateTranscationRecord(Books book, string type);
 };
 
+// HelperFunctions Implementation
 void HelperFunctions::promptUser() {
     cout << endl << "Member Id ?: ";
     cin >> this->memberId;

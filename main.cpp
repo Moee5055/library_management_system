@@ -1,3 +1,10 @@
+/**
+ * @file main.cpp
+ * @brief Entry point for the Library Management System
+ *
+ * This file contains the main function which initializes the system
+ * and starts the main menu loop.
+ */
 #include <iostream>
 #include "./headers/menu.h"
 

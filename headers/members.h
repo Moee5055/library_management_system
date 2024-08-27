@@ -1,3 +1,10 @@
+/**
+ * @file members.h
+ * @brief Represents a member of the library
+ *
+ * This class contains information about library members, including
+ * their ID, name, and contact information.
+ */
 #pragma once
 
 //Header Section

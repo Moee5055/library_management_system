@@ -1,3 +1,10 @@
+/**
+ * @file books.h
+ * @brief Represents a book in the library
+ *
+ * This class encapsulates all the information related to a single book,
+ * including its ID, title, author, publication year, and borrowing status.
+ */
 #pragma once
 
 //Header Section
